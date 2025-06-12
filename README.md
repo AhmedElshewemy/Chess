@@ -1,2 +1,2 @@
 # Chess
-build Chess for learn new things and improve skills
+build Chess for learn and improve skills
