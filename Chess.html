@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+   
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>♛ Chess Game ♛</h1>
+            <div class="game-info">
+                <span>Current Turn: <span id="current-player">White</span></span>
+                <span>Move: <span id="move-count">1</span></span>
+            </div>
+        </div>
+        
+        <div class="chessboard" id="chessboard"></div>
+        
+        <div class="game-controls">
+            <button class="btn" onclick="newGame()">New Game</button>
+            <button class="btn" onclick="undoMove()">Undo Move</button>
+            <button class="btn" onclick="toggleHighlights()">Toggle Hints</button>
+        </div>
+        
+        <div class="status-display" id="game-status">
+            Welcome to Chess! White moves first.
+        </div>
+    </div>
+
+    <script src="chess.js"></script>
+</body>
+</html>
