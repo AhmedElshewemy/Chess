@@ -1,4 +1,4 @@
-    * {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -21,6 +21,8 @@
             padding: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .game-header {
@@ -146,6 +148,7 @@
             display: flex;
             gap: 15px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
