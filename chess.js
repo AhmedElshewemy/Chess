@@ -1,4 +1,4 @@
-       // Chess piece Unicode symbols
+// Chess piece Unicode symbols
         const pieces = {
             'white': {
                 'king': '♔', 'queen': '♕', 'rook': '♖',
@@ -271,12 +271,13 @@
         }
       
         function highlightPossibleMoves(row, col) {
+            // Highlight only valid moves for the selected piece
             const squares = document.querySelectorAll('.square');
             squares.forEach(square => {
                 const r = parseInt(square.dataset.row);
                 const c = parseInt(square.dataset.col);
-
-                if (isValidMove(row, col, r, c)) {
+                // Only highlight if the move is valid and not the current square
+                if ((r !== row || c !== col) && isValidMove(row, col, r, c)) {
                     square.classList.add('possible-move');
                 }
             });
@@ -471,7 +472,6 @@
             document.getElementById('current-player').textContent = 
                 currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1);
             document.getElementById('move-count').textContent = moveCount;
-            
             if (gameState === 'playing') {
                 const status = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}'s turn to move`;
                 document.getElementById('game-status').textContent = status;
@@ -481,7 +481,7 @@
         }
 
         function newGame() {
-             gameBoard = [
+            gameBoard = [
                 ['♜','♞','♝','♛','♚','♝','♞','♜'],
                 ['♟','♟','♟','♟','♟','♟','♟','♟'],
                 [null,null,null,null,null,null,null,null],
@@ -504,35 +504,30 @@
 
         function undoMove() {
             if (gameHistory.length === 0) return;
-            
             const lastMove = gameHistory.pop();
             const [fromRow, fromCol] = lastMove.from;
             const [toRow, toCol] = lastMove.to;
-            
             gameBoard[fromRow][fromCol] = lastMove.piece;
             gameBoard[toRow][toCol] = lastMove.captured;
-            
             currentPlayer = lastMove.player;
             if (currentPlayer === 'black') {
                 moveCount--;
             }
-           
             lastMove = gameHistory.length > 0 ? gameHistory[gameHistory.length - 1] : null;
             gameState = 'playing';
-            
             createBoard();
             updateDisplay();
             updateGameStatus(`${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}'s turn to move`);
-
         }
 
-        function toggleHighlights() {
+        function toggleHighlights(event) {
             showHints = !showHints;
             if (!showHints) {
                 clearHighlights();
             }
-            const btn = event.target;
-            btn.textContent = showHints ? 'Hints Off' : 'Toggle Hints';
+            if (event && event.target) {
+                event.target.textContent = showHints ? 'Hints Off' : 'Toggle Hints';
+            }
         }
 
         // Initialize the game when page loads
